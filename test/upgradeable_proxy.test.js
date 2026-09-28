@@ -436,4 +436,151 @@ describe("DAX Protocol UUPS Upgradeable Architecture", function () {
       expect(await daxToken.balanceOf(partyA.address)).to.equal(stakeAmount);
     });
   });
+
+  describe("Single-Party Auto-Escrow & Two-Party Protection", function () {
+    it("allows Party A to unilaterally cancel and receive 100% refund before Party B accepts", async function () {
+      const escrowAmount = ethers.parseEther("25");
+      const initialProxyAddress = await agreementProxy.getAddress();
+
+      await mockERC20.connect(partyA).approve(initialProxyAddress, escrowAmount);
+
+      const salt = ethers.randomBytes(32);
+      const tx = await agreementProxy
+        .connect(partyA)
+        .createAndFundAgreement(
+          partyB.address,
+          await mockERC20.getAddress(),
+          escrowAmount,
+          SAMPLE_TERMS_HASH,
+          SAMPLE_SCHEDULE_HASH,
+          1n,
+          86400n,
+          salt
+        );
+      const receipt = await tx.wait();
+      const createdEvent = receipt.logs
+        .map((log) => {
+          try {
+            return agreementProxy.interface.parseLog(log);
+          } catch {
+            return null;
+          }
+        })
+        .find((parsed) => parsed && parsed.name === "AgreementCreated");
+
+      const agreementId = createdEvent.args[0];
+
+      // Verify created and funded
+      const ag = await agreementProxy.agreements(agreementId);
+      expect(ag.state).to.equal(1n); // ACTIVE
+      expect(await agreementProxy.partyBAccepted(agreementId)).to.be.false;
+
+      // Party A cancels before Party B accepts
+      const preBalance = await mockERC20.balanceOf(partyA.address);
+      await agreementProxy.connect(partyA).cancelPendingAgreement(agreementId);
+      const postBalance = await mockERC20.balanceOf(partyA.address);
+
+      expect(postBalance - preBalance).to.equal(escrowAmount);
+      const cancelledAg = await agreementProxy.agreements(agreementId);
+      expect(cancelledAg.state).to.equal(5n); // REFUNDED
+    });
+
+    it("strictly blocks Party A from unilaterally cancelling once Party B accepts (Protected Two-Party Escrow)", async function () {
+      const escrowAmount = ethers.parseEther("50");
+      const initialProxyAddress = await agreementProxy.getAddress();
+
+      await mockERC20.connect(partyA).approve(initialProxyAddress, escrowAmount);
+
+      const salt = ethers.randomBytes(32);
+      const tx = await agreementProxy
+        .connect(partyA)
+        .createAndFundAgreement(
+          partyB.address,
+          await mockERC20.getAddress(),
+          escrowAmount,
+          SAMPLE_TERMS_HASH,
+          SAMPLE_SCHEDULE_HASH,
+          1n,
+          86400n,
+          salt
+        );
+      const receipt = await tx.wait();
+      const createdEvent = receipt.logs
+        .map((log) => {
+          try {
+            return agreementProxy.interface.parseLog(log);
+          } catch {
+            return null;
+          }
+        })
+        .find((parsed) => parsed && parsed.name === "AgreementCreated");
+
+      const agreementId = createdEvent.args[0];
+
+      // Party B accepts the agreement
+      await agreementProxy.connect(partyB).acceptAgreement(agreementId);
+      expect(await agreementProxy.partyBAccepted(agreementId)).to.be.true;
+
+      // Party A tries to unilaterally cancel -> strictly BLOCKED
+      await expect(
+        agreementProxy.connect(partyA).cancelPendingAgreement(agreementId)
+      ).to.be.revertedWith("DAX: Cannot unilaterally cancel accepted agreement");
+    });
+
+    it("Open Invitation Escrow: allows creation with partyB = address(0), binds partyB on accept, and protects escrow", async function () {
+      const escrowAmount = ethers.parseEther("100");
+      const zeroAddr = ethers.ZeroAddress;
+      const salt = ethers.encodeBytes32String("open_invitation_salt_1");
+
+      await mockERC20.connect(partyA).approve(agreementProxy.target, escrowAmount);
+
+      // Party A creates agreement with partyB = address(0)
+      const tx = await agreementProxy
+        .connect(partyA)
+        .createAndFundAgreement(
+          zeroAddr,
+          mockERC20.target,
+          escrowAmount,
+          SAMPLE_TERMS_HASH,
+          SAMPLE_SCHEDULE_HASH,
+          1n,
+          86400n,
+          salt
+        );
+      const receipt = await tx.wait();
+      const createdEvent = receipt.logs
+        .map((log) => {
+          try {
+            return agreementProxy.interface.parseLog(log);
+          } catch {
+            return null;
+          }
+        })
+        .find((parsed) => parsed && parsed.name === "AgreementCreated");
+
+      const agreementId = createdEvent.args[0];
+
+      let ag = await agreementProxy.agreements(agreementId);
+      expect(ag.partyB).to.equal(zeroAddr);
+      expect(await agreementProxy.partyBAccepted(agreementId)).to.be.false;
+
+      // Party A cannot accept their own agreement
+      await expect(
+        agreementProxy.connect(partyA).acceptAgreement(agreementId)
+      ).to.be.revertedWith("DAX: Party A cannot accept own agreement");
+
+      // Counterparty (partyB) scans QR / opens link and accepts
+      await agreementProxy.connect(partyB).acceptAgreement(agreementId);
+
+      // Verify partyB is permanently bound to partyB's address and accepted
+      ag = await agreementProxy.agreements(agreementId);
+      expect(ag.partyB).to.equal(partyB.address);
+      expect(await agreementProxy.partyBAccepted(agreementId)).to.be.true;
+
+      // Once accepted, Party A can NO longer unilaterally cancel
+      await expect(
+        agreementProxy.connect(partyA).cancelPendingAgreement(agreementId)
+      ).to.be.revertedWith("DAX: Cannot unilaterally cancel accepted agreement");
+    });
+  });
 });

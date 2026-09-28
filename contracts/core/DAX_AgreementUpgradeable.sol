@@ -83,8 +83,10 @@ contract DAX_AgreementUpgradeable is
     mapping(bytes32 => string) public agreementUris;
     mapping(bytes32 => uint64) public agreementDurations;
     mapping(bytes32 => mapping(uint256 => bytes32)) public periodEvidenceRoots;
+    mapping(bytes32 => bool) public partyBAccepted;
 
     // --- Events ---
+    event AgreementAccepted(bytes32 indexed agreementId, address indexed partyB);
     event AgreementCreated(
         bytes32 indexed agreementId,
         address indexed partyA,
@@ -254,7 +256,6 @@ contract DAX_AgreementUpgradeable is
         bytes32 salt,
         string memory metadataUri
     ) public payable nonReentrant returns (bytes32 agreementId) {
-        require(partyB != address(0), "DAX: Invalid counterparty");
         require(partyB != _msgSender(), "DAX: Cannot make agreement with self");
         require(amount > 0, "DAX: Amount must be greater than 0");
         require(durationSeconds > 0, "DAX: Duration must be greater than 0");
@@ -327,7 +328,6 @@ contract DAX_AgreementUpgradeable is
         bytes32 salt,
         string memory metadataUri
     ) external nonReentrant returns (bytes32 agreementId) {
-        require(partyB != address(0), "DAX: Invalid counterparty");
         require(partyB != _msgSender(), "DAX: Cannot make agreement with self");
         require(amount > 0, "DAX: Amount must be greater than 0");
         require(durationSeconds > 0, "DAX: Duration must be greater than 0");
@@ -398,13 +398,41 @@ contract DAX_AgreementUpgradeable is
         emit AgreementFunded(agreementId, _msgSender(), ag.totalAmount);
     }
 
+    function acceptAgreement(bytes32 agreementId) external nonReentrant {
+        Agreement storage ag = agreements[agreementId];
+        require(ag.state == AgreementState.ACTIVE || ag.state == AgreementState.PENDING, "DAX: Agreement not active or pending");
+
+        if (ag.partyB == address(0)) {
+            require(_msgSender() != ag.partyA, "DAX: Party A cannot accept own agreement");
+            ag.partyB = payable(_msgSender());
+        } else {
+            require(_msgSender() == ag.partyB, "DAX: Only partyB can accept");
+        }
+
+        require(!partyBAccepted[agreementId], "DAX: Already accepted");
+
+        partyBAccepted[agreementId] = true;
+        emit AgreementAccepted(agreementId, _msgSender());
+    }
+
     function cancelPendingAgreement(bytes32 agreementId) external nonReentrant {
         Agreement storage ag = agreements[agreementId];
-        require(ag.state == AgreementState.PENDING, "DAX: Agreement not in PENDING state");
-        require(_msgSender() == ag.partyA, "DAX: Only partyA can cancel pending agreement");
+        require(_msgSender() == ag.partyA, "DAX: Only partyA can cancel");
+        require(!partyBAccepted[agreementId], "DAX: Cannot unilaterally cancel accepted agreement");
+        require(
+            ag.state == AgreementState.PENDING ||
+            (ag.state == AgreementState.ACTIVE && ag.releasedAmount == 0),
+            "DAX: Agreement cannot be cancelled"
+        );
 
+        uint256 refundAmount = ag.totalAmount - ag.releasedAmount;
         ag.state = AgreementState.REFUNDED;
-        emit AgreementRefunded(agreementId, ag.partyA, 0, "Cancelled by partyA before escrow");
+
+        if (refundAmount > 0) {
+            _transferAsset(ag.tokenAddress, ag.partyA, refundAmount);
+        }
+
+        emit AgreementRefunded(agreementId, ag.partyA, refundAmount, "Cancelled by partyA");
     }
 
     function submitAndRelease(
@@ -418,12 +446,17 @@ contract DAX_AgreementUpgradeable is
     ) external nonReentrant {
         Agreement storage ag = agreements[agreementId];
         require(ag.state == AgreementState.ACTIVE, "DAX: Agreement not active");
+        require(ag.partyB != address(0), "DAX: Agreement awaiting counterparty");
         require(block.timestamp <= ag.expiresAt, "DAX: Agreement expired");
         require(periodIndex == ag.currentPeriod, "DAX: Invalid period sequence");
         require(periodIndex < ag.periodCount, "DAX: Exceeds period count");
         require(releaseAmount > 0, "DAX: Release amount must be > 0");
         require(ag.releasedAmount + releaseAmount <= ag.totalAmount, "DAX: Amount exceeds total escrow");
         require(block.timestamp <= deadline, "DAX: Signature expired");
+
+        if (!partyBAccepted[agreementId]) {
+            partyBAccepted[agreementId] = true;
+        }
 
         if (ag.periodCount > 1) {
             bytes32 leaf = keccak256(bytes.concat(keccak256(abi.encode(periodIndex, releaseAmount))));
@@ -516,6 +549,7 @@ contract DAX_AgreementUpgradeable is
     function raiseDispute(bytes32 agreementId, bytes32 evidenceHash) external onlyParties(agreementId) nonReentrant {
         Agreement storage ag = agreements[agreementId];
         require(ag.state == AgreementState.ACTIVE, "DAX: Agreement not active");
+        require(ag.partyB != address(0), "DAX: Agreement awaiting counterparty");
         require(block.timestamp <= ag.expiresAt, "DAX: Agreement expired");
 
         ag.state = AgreementState.DISPUTED;
