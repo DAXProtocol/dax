@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DAX Protocol — Pitch Deck | LAVA VC</title>
+  <meta name="description" content="DAX Protocol: The Universal Trust Layer for Agreements & Settlement in Frontier Markets. Non-custodial escrows, anti-corruption court, and mobile-native client on Arbitrum One.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-canvas: #090A0F;
+      --bg-card: rgba(18, 20, 28, 0.75);
+      --bg-card-hover: rgba(26, 30, 42, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(15, 97, 255, 0.35);
+      --accent-blue: #0F61FF;
+      --accent-blue-glow: rgba(15, 97, 255, 0.45);
+      --accent-cyan: #00F0FF;
+      --text-main: #FFFFFF;
+      --text-muted: #8E95A5;
+      --text-faint: #52596A;
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Background Atmosphere */
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      width: 70vw;
+      height: 70vw;
+      max-width: 800px;
+      max-height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 97, 255, 0.12) 0%, rgba(0, 240, 255, 0.03) 40%, transparent 70%);
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(80px);
+    }
+
+    .ambient-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 60%, transparent 100%);
+    }
+
+    /* Top Navigation Bar */
+    header {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(12px);
+      background: rgba(9, 10, 15, 0.7);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .logo-glyph {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #161A24, #0D0E15);
+      border: 1px solid var(--border-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(15, 97, 255, 0.3);
+    }
+
+    .logo-glyph svg {
+      width: 18px;
+      height: 18px;
+      fill: #FFFFFF;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(15, 97, 255, 0.15);
+      color: #60A5FA;
+      border: 1px solid rgba(15, 97, 255, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn.primary {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 15px var(--accent-blue-glow);
+    }
+
+    .nav-btn.primary:hover {
+      background: #256FFF;
+    }
+
+    /* Deck Viewport */
+    .deck-container {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slides-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 580px;
+      max-height: 720px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(18px) scale(0.985);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.4s;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Slide Content Typography */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #60A5FA;
+      margin-bottom: 14px;
+    }
+
+    .slide-badge::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      box-shadow: 0 0 8px var(--accent-blue);
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .slide-title span {
+      background: linear-gradient(135deg, #FFFFFF 30%, #93C5FD 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 820px;
+      margin-bottom: 28px;
+    }
+
+    /* Grid Layouts inside slides */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* Card Component */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .card.highlight {
+      border-color: var(--border-accent);
+      background: linear-gradient(180deg, rgba(15, 97, 255, 0.1) 0%, rgba(18, 20, 28, 0.8) 100%);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(15, 97, 255, 0.15);
+      border: 1px solid rgba(15, 97, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #93C5FD;
+      font-size: 1.1rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Metric / Stat box */
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* Flow pill timeline */
+    .flow-step {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      margin-bottom: 6px;
+      letter-spacing: 0.1em;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Bottom Bar Controls */
+    footer {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(9, 10, 15, 0.7);
+      backdrop-filter: blur(12px);
+    }
+
+    .progress-bar-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      width: 12.5%;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px var(--accent-blue-glow);
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .slide-counter span {
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .dots-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--accent-blue);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px var(--accent-blue);
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-blue);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(15, 97, 255, 0.4);
+    }
+
+    .cta-btn:hover {
+      background: #256FFF;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 25px rgba(15, 97, 255, 0.6);
+    }
+
+    .cta-btn.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      box-shadow: none;
+    }
+
+    .cta-btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      header, footer {
+        padding: 14px 20px;
+      }
+      .slide-title {
+        font-size: 1.85rem;
+      }
+      .deck-container {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Header -->
+  <header>
+    <a href="#" class="brand">
+      <div class="logo-glyph">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h7v4H8v8h3v4H4V4zm9 0h7v16h-7v-4h3V8h-3V4z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">DAX Protocol</div>
+      </div>
+      <span class="brand-tag">LAVA VC Pitch</span>
+    </a>
+
+    <div class="deck-controls">
+      <button class="nav-btn" id="prevBtn" title="Previous Slide (←)">
+        <span>←</span> Prev
+      </button>
+      <button class="nav-btn primary" id="nextBtn" title="Next Slide (→ or Space)">
+        Next <span>→</span>
+      </button>
+      <a href="https://play.google.com/store/apps/details?id=com.dax.app" target="_blank" class="nav-btn" style="color: #60A5FA;">
+        Google Play ↗
+      </a>
+      <a href="https://github.com/DAXProtocol/dax" target="_blank" class="nav-btn">
+        GitHub ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Slide Container -->
+  <main class="deck-container">
+    <div class="slides-wrapper">
+
+      <!-- SLIDE 1: COVER -->
+      <section class="slide active" data-slide="1">
+        <div class="slide-badge">LAVA Founders & Investors Deck · Frontier Infrastructure</div>
+        <h1 class="slide-title">
+          <span>The Decentralized Trust Layer</span><br/>
+          for African & Frontier Commerce
+        </h1>
+        <p class="slide-subtitle">
+          DAX Protocol is a fully self-custodial smart escrow and dispute arbitration protocol built natively for <strong>Arbitrum One</strong>. We replace counterparty risk and centralized P2P middlemen with deterministic on-chain settlement, cryptographic Merkle evidence, and decentralized commit-reveal courts.
+        </p>
+
+        <div class="grid-4" style="margin-top: 10px;">
+          <div class="card highlight">
+            <div class="stat-number">532</div>
+            <div class="stat-label">Mobile Tests Passing</div>
+          </div>
+          <div class="card highlight">
+            <div class="stat-number">87</div>
+            <div class="stat-label">Contract Invariant Tests</div>
+          </div>
+          <div class="card highlight">
+            <div class="stat-number">0.25%</div>
+            <div class="stat-label">Sustainable Protocol Fee</div>
+          </div>
+          <div class="card highlight">
+            <div class="stat-number">0-Server</div>
+            <div class="stat-label">100% Client-Side Keys</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: THE PROBLEM -->
+      <section class="slide" data-slide="2">
+        <div class="slide-badge">Market Pain Point · The African Trust Deficit</div>
+        <h2 class="slide-title">
+          Stablecoins are Booming, but<br/>
+          <span>Settlement Trust is Broken</span>
+        </h2>
+        <p class="slide-subtitle">
+          Over $30B+ in annual cross-border trade, freelance payments, and informal OTC currency swaps flow across Africa in USDT and USDC. Yet parties face catastrophic counterparty risks:
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">⚠️</div>
+              <div class="card-title">Centralized P2P Fraught with Bans</div>
+            </div>
+            <p class="card-desc">
+              Binance P2P and legacy platforms freeze user accounts, seize balances, enforce mandatory KYC surveillance, and subject merchants to opaque, slow customer support disputes.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">💬</div>
+              <div class="card-title">The WhatsApp OTC Trap</div>
+            </div>
+            <p class="card-desc">
+              Cross-border traders and freelancers rely on informal WhatsApp/Telegram groups. Without programmatic escrow, one party must send first—leading to rampant fraud, default, and no recourse.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🏛️</div>
+              <div class="card-title">No Frontier Legal Recourse</div>
+            </div>
+            <p class="card-desc">
+              Cross-border commercial disputes across Ethiopia, Kenya, Nigeria, and Dubai cannot afford international litigation. There is no decentralized, economically-incentivized dispute layer.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: THE SOLUTION -->
+      <section class="slide" data-slide="3">
+        <div class="slide-badge">The Protocol Engine · 4-Stage Lifecycle</div>
+        <h2 class="slide-title">
+          <span>CREATE · ESCROW · EVIDENCE · RESOLVE</span>
+        </h2>
+        <p class="slide-subtitle">
+          DAX replaces trusted middlemen with an automated, non-custodial EVM state machine running on Arbitrum One:
+        </p>
+
+        <div class="grid-4">
+          <div class="flow-step">
+            <div class="step-num">STAGE 01</div>
+            <div class="step-title">CREATE</div>
+            <div class="step-desc">
+              Bilateral or marketplace agreement initiated. Canonical terms and milestones are cryptographically bound via EIP-712 typed signatures (`termsHash`).
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">STAGE 02</div>
+            <div class="step-title">ESCROW</div>
+            <div class="step-desc">
+              Tokens (USDT, USDC, ARB, ETH) are locked directly in `DAX_Agreement.sol`. Zero admin keys, zero server custody. Funds release only on milestone satisfaction.
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">STAGE 03</div>
+            <div class="step-title">EVIDENCE</div>
+            <div class="step-desc">
+              Work deliverables, bills of lading, or receipts are fingerprinted client-side with SHA-256 and committed as immutable Merkle roots on-chain.
+            </div>
+          </div>
+
+          <div class="flow-step">
+            <div class="step-num">STAGE 04</div>
+            <div class="step-title">RESOLVE</div>
+            <div class="step-desc">
+              Disputed escrows automatically escalate to `DAX_Court.sol`. Staked community jurors vote using a commit-reveal Schelling-point game with slashing for corruption.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: PRODUCT EXPERIENCE -->
+      <section class="slide" data-slide="4">
+        <div class="slide-badge">Mobile-Native Product · Android & iOS</div>
+        <h2 class="slide-title">
+          Institutional Security in<br/>
+          <span>A Consumer-Grade Mobile Experience</span>
+        </h2>
+        <p class="slide-subtitle">
+          Built with Flutter Clean Architecture. A complete self-custodial keychain and agreement execution client designed to feel as fast and intuitive as Cash App or Phantom.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🛡️</div>
+              <div class="card-title">Pure AndroidX Biometrics</div>
+            </div>
+            <p class="card-desc">
+              Hardware-backed `BIOMETRIC_STRONG` authentication. Zero fallback to OS passcodes. Android Keystore / iOS Keychain AES-GCM encrypted vault.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🔒</div>
+              <div class="card-title">Screen Privacy Protection</div>
+            </div>
+            <p class="card-desc">
+              Dynamic `FLAG_SECURE` integration automatically blinds task switcher previews and blocks screenshots whenever private keys or seed phrases are active.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">⚡</div>
+              <div class="card-title">Sub-Cent L2 Execution</div>
+            </div>
+            <p class="card-desc">
+              Natively optimized for Arbitrum One. Transactions confirm in 250ms with fractions of a cent in fees, making micro-agreements and small escrows viable.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: LIVE TRACTION -->
+      <section class="slide" data-slide="5">
+        <div class="slide-badge">Execution & Traction · Real Code, Not Whitepapers</div>
+        <h2 class="slide-title">
+          <span>Fully Tested, Production-Ready</span>
+        </h2>
+        <p class="slide-subtitle">
+          DAX is already engineered and deployed, ready for immediate pilot scaling across East Africa:
+        </p>
+
+        <div class="grid-2">
+          <div class="card highlight">
+            <div class="card-title" style="font-size: 1.25rem;">📱 Google Play Store Release</div>
+            <p class="card-desc">
+              Android package <strong>`com.dax.app`</strong> (v1.3.5+9). Compliant store listing configured with privacy policies, permission scopes, and verified keystore fingerprints.
+            </p>
+            <div style="margin-top: 10px;">
+              <a href="https://play.google.com/store/apps/details?id=com.dax.app" target="_blank" class="cta-btn">
+                View on Google Play ↗
+              </a>
+            </div>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-title" style="font-size: 1.25rem;">⛓️ Deployed Protocol Contracts</div>
+            <p class="card-desc">
+              Solidity 0.8.24 contracts (`DAX_Agreement`, `DAX_Court`, `DAX_OfferPool`) tested against 87 adversarial attack vectors, reentrancy guards, and mathematical asset conservation (INV-01 to INV-10).
+            </p>
+            <div style="margin-top: 10px;">
+              <a href="https://github.com/DAXProtocol/dax" target="_blank" class="cta-btn secondary">
+                Audit Monorepo on GitHub ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: DEFENDABILITY & BUSINESS MODEL -->
+      <section class="slide" data-slide="6">
+        <div class="slide-badge">Flywheel & Unit Economics · Defensibility</div>
+        <h2 class="slide-title">
+          The Network Effects of<br/>
+          <span>Decentralized Arbitration</span>
+        </h2>
+        <p class="slide-subtitle">
+          How DAX builds a compounding moat while maintaining clean, non-custodial regulatory status:
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">💸</div>
+              <div class="card-title">0.25% Escrow Commission</div>
+            </div>
+            <p class="card-desc">
+              A flat 0.25% protocol fee deducted upon successful deliverable release. Highly competitive against centralized platforms (1.5%–3.5%) while yielding massive margins on volume.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">⚖️</div>
+              <div class="card-title">Anti-Bribery Schelling Game</div>
+            </div>
+            <p class="card-desc">
+              Commit-reveal voting (`keccak256(vote + salt)`) prevents vote-buying. Jurors must stake collateral to participate. Dishonest voters are slashed; honest jurors earn dispute fees.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">🌍</div>
+              <div class="card-title">Zero Custodial Overhead</div>
+            </div>
+            <p class="card-desc">
+              Because DAX holds zero client keys and operates purely as an on-chain software coordinator, we avoid the heavy capital reserves and bureaucratic banking licenses required of neobanks.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRE-SEED ASK -->
+      <section class="slide" data-slide="7">
+        <div class="slide-badge">Capital Allocation · The Pre-Seed Round</div>
+        <h2 class="slide-title">
+          Raising $150k – $300k<br/>
+          <span>To Anchor Frontier On-Chain Commerce</span>
+        </h2>
+        <p class="slide-subtitle">
+          Backing DAX accelerates our distribution to freelance hubs, OTC merchant corridors, and local stablecoin on-ramps across East & West Africa:
+        </p>
+
+        <div class="grid-4">
+          <div class="card">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">Security & Audits</div>
+            <p class="card-desc" style="font-size: 0.82rem;">
+              Tier-1 formal verification & smart contract security audit before mainnet liquidity pools scale.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="stat-number">30%</div>
+            <div class="stat-label">Juror Liquidity</div>
+            <p class="card-desc" style="font-size: 0.82rem;">
+              Bootstrapping decentralized court staking pools to ensure deep capitalization for high-value disputes.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="stat-number">20%</div>
+            <div class="stat-label">Local On-Ramp Rails</div>
+            <p class="card-desc" style="font-size: 0.82rem;">
+              Direct SDK integrations with African local stablecoin issuers (cNGN, KES, ETB) and mobile money gateways.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="stat-number">10%</div>
+            <div class="stat-label">Merchant Growth</div>
+            <p class="card-desc" style="font-size: 0.82rem;">
+              Onboarding top freelance agency networks and import/export merchants across Addis Ababa, Nairobi, & Lagos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: CONTACT & VERIFICATION -->
+      <section class="slide" data-slide="8">
+        <div class="slide-badge">Let's Build Together · LAVA VC x DAX</div>
+        <h2 class="slide-title">
+          <span>Let's Discuss the Future of Trust</span>
+        </h2>
+        <p class="slide-subtitle">
+          We welcome the LAVA team to test the live mobile client, audit our contract tests, and partner to build the foundational trust substrate for the African continent.
+        </p>
+
+        <div class="card highlight" style="max-width: 650px; margin-top: 10px;">
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 1.15rem; font-weight: 700;">Getasew Bekahegn — Founder & Lead Engineer</div>
+            <div style="font-family: var(--font-mono); color: #60A5FA; font-size: 0.95rem;">getasewbekahegn@gmail.com</div>
+            <div style="color: var(--text-muted); font-size: 0.9rem;">Addis Ababa, Ethiopia · Global Remote</div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;">
+            <a href="https://play.google.com/store/apps/details?id=com.dax.app" target="_blank" class="cta-btn">
+              Download on Play Store
+            </a>
+            <a href="https://github.com/DAXProtocol/dax" target="_blank" class="cta-btn secondary">
+              GitHub Monorepo
+            </a>
+            <a href="mailto:getasewbekahegn@gmail.com" class="cta-btn secondary">
+              Email Founder
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Navigation -->
+  <footer>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slide-counter">
+      Slide <span id="currentSlideIndex">1</span> of <span id="totalSlidesCount">8</span>
+    </div>
+
+    <div class="dots-nav" id="dotsContainer"></div>
+
+    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-faint);">
+      Use <strong>←</strong> / <strong>→</strong> or <strong>Space</strong> to navigate
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const totalSlides = slides.length;
+      let currentIdx = 0;
+
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const currentSlideIndex = document.getElementById('currentSlideIndex');
+      const totalSlidesCount = document.getElementById('totalSlidesCount');
+      const progressBar = document.getElementById('progressBar');
+      const dotsContainer = document.getElementById('dotsContainer');
+
+      totalSlidesCount.textContent = totalSlides;
+
+      // Create dots
+      slides.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (idx === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsContainer.children);
+
+      function updateSlide(idx) {
+        slides.forEach((s, i) => {
+          s.classList.toggle('active', i === idx);
+        });
+        dots.forEach((d, i) => {
+          d.classList.toggle('active', i === idx);
+        });
+
+        currentSlideIndex.textContent = idx + 1;
+        progressBar.style.width = ((idx + 1) / totalSlides * 100) + '%';
+        prevBtn.style.opacity = idx === 0 ? '0.5' : '1';
+        nextBtn.innerHTML = idx === totalSlides - 1 ? 'Start Over ↺' : 'Next <span>→</span>';
+      }
+
+      function goToSlide(idx) {
+        if (idx < 0) currentIdx = 0;
+        else if (idx >= totalSlides) currentIdx = 0;
+        else currentIdx = idx;
+        updateSlide(currentIdx);
+      }
+
+      function nextSlide() {
+        goToSlide(currentIdx + 1);
+      }
+
+      function prevSlide() {
+        if (currentIdx > 0) goToSlide(currentIdx - 1);
+      }
+
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+
+      // Keyboard Controls
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+          e.preventDefault();
+          nextSlide();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          prevSlide();
+        }
+      });
+
+      // Mobile Touch Swipe Support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      window.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      window.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 50) {
+          if (diff < 0) nextSlide();
+          else prevSlide();
+        }
+      }, { passive: true });
+
+      updateSlide(0);
+    })();
+  </script>
+</body>
+</html>
