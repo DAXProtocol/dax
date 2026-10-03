@@ -11,7 +11,7 @@
 ## Direct Answers to LAVA VC Due Diligence Questions
 
 ### 1. What does your company do?
-**DAX Protocol** is the decentralized, self-custodial trust layer for African and frontier commerce. We eliminate counterparty risk and centralized middlemen for cross-border trade, freelance payments, and OTC stablecoin transactions through:
+**DAX Protocol** is the decentralized, self-custodial trust layer for African and frontier commerce. We eliminate counterparty risk and centralized middlemen for cross-border trade, freelance payments, and stablecoin commercial settlement through:
 1. **Deterministic Smart Escrows (`DAX_AgreementUpgradeable.sol`)**: Non-custodial, programmable escrow state machine running on Arbitrum One.
 2. **Cryptographic Deliverable Proofs**: SHA-256 fingerprinting of invoices, code, or bills of lading committed as immutable Merkle roots on-chain.
 3. **Decentralized Commit-Reveal Dispute Arbitration (`DAX_Court.sol`)**: Community-staked Schelling-point juror court that resolves commercial disagreements fairly without expensive lawyers or corruptible centralized support desks.
@@ -21,17 +21,17 @@
 
 ### 2. How big is the market? What geographies are your primary market(s)?
 - **Target Segments & Use Cases**:
-  - Software freelancers and digital service providers receiving international payments in stablecoins.
-  - Informal OTC merchants exchanging USDT/USDC with trusted settlement proofs.
-  - Cross-border wholesale merchants settling commercial trade deliverables with milestone escrow.
+  - **Software Freelancers & Teams**: Cross-border payments for digital work and international clients.
+  - **Stablecoin Commerce**: Trustless non-custodial settlement and escrow.
+  - **Cross-Border Traders**: Physical deliveries and commercial trade agreements.
+  - **Settlement Architecture**: Non-custodial escrow on Arbitrum One.
 - **Two-Pronged Geographic Strategy**:
   - **Ethiopia — Product & Technology Beachhead**:
-    - **Engineering Base**: DAX is architected and built from Addis Ababa.
-    - **Permitted Software & Freelance Use Cases**: Local developers and remote talent participate in permitted activities, including software freelance milestone escrow, cryptographic deliverable verification, and international commercial agreements.
-    - **Regulatory Realism**: The National Bank of Ethiopia (NBE) clarified in February 2026 that Birr-paired P2P crypto transactions are prohibited without explicit authorization. We do *not* promise an immediate fiat on-ramp in Ethiopia; instead, we continue regulatory research and monitor NBE's evolving 2026–2030 digital-asset and risk-based tiered licensing framework.
-  - **Kenya & Priority African Markets — Initial On-Ramp Expansion**:
-    - **Regulated Payment Integrations**: Expansion focuses on integrating with existing, licensed payment providers (e.g. M-Pesa, which is already a licensed payment instrument issuer in Kenya, with Safaricom Ethiopia's M-PESA separately listed by NBE as a licensed payment instrument issuer in Ethiopia).
-    - **Partnering vs. Issuing**: DAX integrates with licensed payment instrument issuers and compliant on-ramps across priority corridors rather than attempting to become a standalone payment instrument issuer.
+    - **Product & Engineering Base**: Built from Addis Ababa, with local developers and freelancers as an early user and testing base for permitted software milestone escrow, deliverable proofs, and commercial agreements.
+    - **Regulatory Monitoring**: Monitoring NBE's evolving digital-asset and payment frameworks while avoiding premature claims about fiat on-ramp availability or licensing.
+  - **Kenya & Priority Corridors**:
+    - **Regulated Payment-Rail Expansion**: Kenya and other priority African markets are potential early expansion corridors for integrations with licensed payment providers and payment instrument issuers.
+    - **Trust Layer Model**: DAX provides the non-custodial smart escrow and dispute-arbitration layer, while regulated payment providers handle applicable fiat payment and on/off-ramp functions.
 - **Strategic Core**: *"Ethiopia is our technical and product base; regulated African payment corridors are our expansion path."*
 - **Architecture Distinction**: DAX's core product is the non-custodial **trust, agreement, and dispute resolution layer**, not necessarily the payment gateway itself. We eliminate counterparty risk and escrow funds trustlessly on Arbitrum One without needing to own every local fiat rail.
 
@@ -43,7 +43,7 @@
 - **619 Passing Automated Tests (Zero Compromise Engineering)**:
   - **532 Automated Tests** passing on the Flutter mobile client (`dax-app`).
   - **87 Invariant & Adversarial Tests** passing on Hardhat/Solidity smart contracts (`dax-contracts`), mathematically proving asset conservation invariants (INV-01 to INV-10) with 0 static analysis issues.
-- **Target User Personas**: Software freelancers & agencies, informal OTC currency traders, and import/export physical merchants in Addis Ababa and Nairobi.
+- **Target User Personas**: Software freelancers & agencies, stablecoin commerce participants, and cross-border physical merchants in East Africa.
 
 ---
 
@@ -64,7 +64,7 @@
 ### 5. What's your business model?
 - **0.25% Protocol Escrow Fee**: Automatically deducted from released escrow upon successful agreement completion. Over 10x cheaper than centralized P2P platforms (1.5%–3.5%) and freelance marketplaces (10%–20%), driving organic volume migration while generating predictable protocol cash flow.
 - **Dispute Resolution Fees**: Court filing fees and a portion of slashed stakes from outlier jurors contribute toward sustaining court liquidity and the protocol treasury.
-- **B2B Escrow-as-a-Service API/SDK**: Future integration enabling regional freelance directories, job boards, and OTC desks to embed DAX smart escrow natively.
+- **B2B Escrow-as-a-Service API/SDK**: Future integration enabling regional freelance directories, job boards, and commercial marketplaces to embed DAX smart escrow natively.
 - **Low Operational Overhead**: Non-custodial software architecture eliminates custodial balance sheet liabilities, third-party custody fees, and costly regulatory capital reserves.
 
 ---
@@ -76,7 +76,7 @@
   - **Technical Depth**: Backend and systems engineer with experience in Flutter Clean Architecture, Solidity smart contracts and invariants, cryptographic key management, and hardware-backed mobile security.
 - **Community & Ecosystem**:
   - **Developer & Ecosystem Community**: Engagement with African Web3 developers, security researchers, and blockchain infrastructure communities.
-  - **Merchant Testing**: Direct testing and feedback from freelance, software-export, and OTC stablecoin users in Addis Ababa and Nairobi.
+  - **Merchant Testing**: Early testing and iterative feedback from freelance, software-export, and stablecoin commerce users in East Africa.
   - **Open Source**: DAX's codebase is publicly available for community review and verification.
 
 ---
