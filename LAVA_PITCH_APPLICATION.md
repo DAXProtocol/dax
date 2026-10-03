@@ -4,7 +4,7 @@
 **Live Interactive Deck**: [https://daxprotocol.github.io/dax/](https://daxprotocol.github.io/dax/)  
 **Live Mobile Client**: [Google Play Store (`com.dax.app`)](https://play.google.com/store/apps/details?id=com.dax.app)  
 **GitHub Monorepo**: [https://github.com/DAXProtocol/dax](https://github.com/DAXProtocol/dax)  
-**Founder & Contact**: Getasew Bekahegn (`getasewbekahegn@gmail.com`) — Addis Ababa, Ethiopia  
+**Founder & Contact**: Getasew Tilahun (`getasewbekahegn@gmail.com`) — Addis Ababa, Ethiopia  
 
 ---
 
@@ -66,7 +66,7 @@
 ---
 
 ### 6. Tell me about your team.
-- **Founder & Lead Protocol Engineer: Getasew Bekahegn**
+- **Founder & Lead Protocol Engineer: Getasew Tilahun**
   - **Proven Execution**: Architected and implemented the DAX monorepo, including 619 passing tests, client-side cryptographic key storage, EVM smart contracts, and the production Android application published on Google Play.
   - **Market Proximity**: Based in Addis Ababa, Ethiopia, with direct exposure to local FX, P2P commerce, freelance payments, and cross-border payment challenges.
   - **Technical Depth**: Backend and systems engineer with experience in Flutter Clean Architecture, Solidity smart contracts and invariants, cryptographic key management, and hardware-backed mobile security.
