@@ -22,14 +22,18 @@
 ### 2. How big is the market? What geographies are your primary market(s)?
 - **Target Segments & Use Cases**:
   - Software freelancers and digital service providers receiving international payments in stablecoins.
-  - Informal OTC merchants exchanging USDT/USDC for local fiat currencies.
-  - Cross-border wholesale merchants settling physical trade deliverables.
-- **Primary Geographies**:
-  - **Beachhead: East Africa (Ethiopia & Kenya)**.
-    - *Ethiopia (120M+ pop)*: Booming software freelance and remote work talent base facing strict FX controls, acute USD shortages, and severe friction receiving international bank transfers.
-    - *Kenya (55M+ pop)*: Established regional hub for digital work, tech exports, and mobile money liquidity (M-Pesa).
-  - **Expansion Corridors**: High-volume commercial settlement corridors linking East Africa to West Africa (Nigeria, Ghana) and regional merchant hubs in the UAE (Dubai).
-- **Market Context**: Stablecoins (USDT & USDC) are already the practical medium for cross-border settlements in frontier markets, but over 90% of informal transactions still rely on high-risk WhatsApp groups or centralized exchanges where account freezes and arbitrary dispute decisions are common.
+  - Informal OTC merchants exchanging USDT/USDC with trusted settlement proofs.
+  - Cross-border wholesale merchants settling commercial trade deliverables with milestone escrow.
+- **Two-Pronged Geographic Strategy**:
+  - **Ethiopia — Product & Technology Beachhead**:
+    - **Engineering Base**: DAX is architected and built from Addis Ababa.
+    - **Permitted Software & Freelance Use Cases**: Local developers and remote talent participate in permitted activities, including software freelance milestone escrow, cryptographic deliverable verification, and international commercial agreements.
+    - **Regulatory Realism**: The National Bank of Ethiopia (NBE) clarified in February 2026 that Birr-paired P2P crypto transactions are prohibited without explicit authorization. We do *not* promise an immediate fiat on-ramp in Ethiopia; instead, we continue regulatory research and monitor NBE's evolving 2026–2030 digital-asset and risk-based tiered licensing framework.
+  - **Kenya & Priority African Markets — Initial On-Ramp Expansion**:
+    - **Regulated Payment Integrations**: Expansion focuses on integrating with existing, licensed payment providers (e.g. M-Pesa, which is already a licensed payment instrument issuer in Kenya, with Safaricom Ethiopia's M-PESA separately listed by NBE as a licensed payment instrument issuer in Ethiopia).
+    - **Partnering vs. Issuing**: DAX integrates with licensed payment instrument issuers and compliant on-ramps across priority corridors rather than attempting to become a standalone payment instrument issuer.
+- **Strategic Core**: *"Ethiopia is our technical and product base; regulated African payment corridors are our expansion path."*
+- **Architecture Distinction**: DAX's core product is the non-custodial **trust, agreement, and dispute resolution layer**, not necessarily the payment gateway itself. We eliminate counterparty risk and escrow funds trustlessly on Arbitrum One without needing to own every local fiat rail.
 
 ---
 
@@ -58,10 +62,10 @@
 ---
 
 ### 5. What's your business model?
-- **0.10% Protocol Escrow Fee (0.25% Hard Cap)**: Currently set at a lean 0.10% (10 bps) with an immutable smart contract ceiling of 0.25% (25 bps). Over 15x–30x cheaper than centralized platforms (Binance P2P 1.5%–2%, Upwork 10%–20%), driving rapid viral merchant migration while accumulating predictable recurring protocol revenue.
-- **Dispute Resolution & Slashing Yield**: Filing fees and a percentage of slashed outlier juror stakes accrue to the decentralized Protocol Treasury.
-- **B2B Escrow-as-a-Service API/SDK**: Embedding DAX escrow and arbitration rails into regional freelance gig platforms, e-commerce directories, and local OTC desks.
-- **Infinite Operating Leverage**: Non-custodial software coordination protocol requiring no bank reserves, zero credit risk, and zero custodial capital liability.
+- **0.25% Protocol Escrow Fee**: Automatically deducted from released escrow upon successful agreement completion. Over 10x cheaper than centralized P2P platforms (1.5%–3.5%) and freelance marketplaces (10%–20%), driving organic volume migration while generating predictable protocol cash flow.
+- **Dispute Resolution Fees**: Court filing fees and a portion of slashed stakes from outlier jurors contribute toward sustaining court liquidity and the protocol treasury.
+- **B2B Escrow-as-a-Service API/SDK**: Future integration enabling regional freelance directories, job boards, and OTC desks to embed DAX smart escrow natively.
+- **Low Operational Overhead**: Non-custodial software architecture eliminates custodial balance sheet liabilities, third-party custody fees, and costly regulatory capital reserves.
 
 ---
 
@@ -81,11 +85,11 @@
 - **Round Size**: **$200,000 – $300,000** Pre-Seed
 - **Investment Instrument**: **Post-Money SAFE + Token Warrant**
 - **Valuation Cap**: **$3.5M – $5.0M**
-- **Target Runway**: 18 Months to Seed / Self-Sustaining
+- **Target Runway**: 18 Months
 - **Use of Funds**:
   - **40% Security & Formal Audits**: Tier-1 smart contract audit & formal proof prior to scaling protocol liquidity.
   - **30% Juror Staking**: Bootstrapping decentralized court pools.
-  - **20% Regional On-Ramps**: M-Pesa, Telebirr & local stablecoin rails.
+  - **20% Local Payment Rails**: Regulated on-ramp/off-ramp integrations across priority African markets.
   - **10% Merchant Growth**: Freelancer & merchant corridor onboarding.
 
 ---
