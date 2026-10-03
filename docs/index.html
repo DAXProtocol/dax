@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>DAX Protocol — Investor Pitch Deck | LAVA VC</title>
-  <meta name="description" content="DAX Protocol: The Universal Trust Layer for African & Frontier Commerce. Non-custodial smart escrows, cryptographic evidence, and stake-secured dispute arbitration on Arbitrum One.">
+  <meta name="description" content="DAX Protocol: Non-custodial smart escrows and decentralized dispute arbitration on Arbitrum One for African and frontier commerce.">
+  <link rel="icon" type="image/png" href="dax_logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -48,7 +49,6 @@
       position: relative;
     }
 
-    /* Ambient Background Atmosphere */
     .ambient-glow {
       position: fixed;
       pointer-events: none;
@@ -77,7 +77,6 @@
       mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 60%, transparent 100%);
     }
 
-    /* Top Navigation Bar */
     header {
       position: relative;
       z-index: 20;
@@ -110,12 +109,6 @@
       justify-content: center;
       box-shadow: 0 0 15px rgba(15, 97, 255, 0.3);
       flex-shrink: 0;
-    }
-
-    .logo-glyph svg {
-      width: 18px;
-      height: 18px;
-      fill: #FFFFFF;
     }
 
     .brand-title {
@@ -174,7 +167,6 @@
       background: #256FFF;
     }
 
-    /* Deck Viewport */
     .deck-container {
       position: relative;
       z-index: 10;
@@ -186,7 +178,7 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      min-height: 0; /* Crucial for internal flex scrolling */
+      min-height: 0;
       overflow: hidden;
     }
 
@@ -237,7 +229,6 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Slide Content Typography */
     .slide-badge {
       display: inline-flex;
       align-items: center;
@@ -265,7 +256,7 @@
       font-family: var(--font-display);
       font-size: clamp(1.8rem, 3.6vw, 2.9rem);
       font-weight: 700;
-      line-height: 1.12;
+      line-height: 1.15;
       letter-spacing: -0.03em;
       margin-bottom: 12px;
       flex-shrink: 0;
@@ -286,7 +277,6 @@
       flex-shrink: 0;
     }
 
-    /* Grid Layouts inside slides */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -305,7 +295,6 @@
       gap: 14px;
     }
 
-    /* Card Component */
     .card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
@@ -362,7 +351,6 @@
       color: var(--text-muted);
     }
 
-    /* Metric / Stat box */
     .stat-number {
       font-family: var(--font-display);
       font-size: 2.1rem;
@@ -380,7 +368,6 @@
       color: var(--text-muted);
     }
 
-    /* Flow pill timeline */
     .flow-step {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-subtle);
@@ -411,7 +398,6 @@
       line-height: 1.42;
     }
 
-    /* Terms List Rows */
     .term-item {
       display: flex;
       justify-content: space-between;
@@ -438,7 +424,6 @@
       text-align: right;
     }
 
-    /* CTA buttons */
     .cta-btn {
       display: inline-flex;
       align-items: center;
@@ -473,7 +458,6 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* Bottom Bar Controls */
     footer {
       position: relative;
       z-index: 20;
@@ -527,7 +511,7 @@
       background: rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: all 0.2s ease;
-      padding: 3px; /* expand tap target */
+      padding: 3px;
       background-clip: content-box;
     }
 
@@ -538,7 +522,6 @@
       background-clip: content-box;
     }
 
-    /* Responsive - Tablets & Mobile */
     @media (max-width: 900px) {
       header {
         padding: 12px 16px;
@@ -664,7 +647,6 @@
       }
     }
 
-    /* Small phone screens */
     @media (max-width: 480px) {
       header {
         padding: 10px 12px;
@@ -673,11 +655,6 @@
       .logo-glyph {
         width: 28px;
         height: 28px;
-      }
-
-      .logo-glyph svg {
-        width: 15px;
-        height: 15px;
       }
 
       .brand-title {
@@ -715,10 +692,8 @@
   <!-- Header -->
   <header>
     <a href="#" class="brand">
-      <div class="logo-glyph">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h7v4H8v8h3v4H4V4zm9 0h7v16h-7v-4h3V8h-3V4z" />
-        </svg>
+      <div class="logo-glyph" style="padding: 2px;">
+        <img src="dax_logo.png" alt="DAX Protocol Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
       </div>
       <div>
         <div class="brand-title">DAX Protocol</div>
@@ -740,15 +715,15 @@
   <main class="deck-container">
     <div class="slides-wrapper">
 
-      <!-- SLIDE 1: COVER / ELEVATOR PITCH -->
+      <!-- SLIDE 1: COVER -->
       <section class="slide active" data-slide="1">
-        <div class="slide-badge">LAVA Founders & Investors Deck · Frontier Trust Infrastructure</div>
+        <div class="slide-badge">Pre-Seed Pitch · Non-Custodial Escrow & Arbitration</div>
         <h1 class="slide-title">
-          <span>The Decentralized Trust Layer</span><br/>
-          for African & Frontier Commerce
+          <span>Non-Custodial Escrows & Dispute Resolution</span><br/>
+          for Frontier Markets
         </h1>
         <p class="slide-subtitle">
-          DAX Protocol is a fully self-custodial smart escrow, cryptographic evidence, and decentralized dispute arbitration protocol built natively for <strong>Arbitrum One</strong>. We replace counterparty risk and centralized P2P middlemen with deterministic on-chain settlement, Merkle deliverable verification, and commit-reveal community courts.
+          DAX Protocol provides self-custodial smart escrows, deliverable hash verification, and decentralized dispute arbitration on <strong>Arbitrum One</strong>. Built to address counterparty risk in cross-border freelance payments and informal P2P commerce.
         </p>
 
         <div class="grid-4" style="margin-top: 8px;">
@@ -765,89 +740,89 @@
             <div class="stat-label">Fee (0.25% Max Cap)</div>
           </div>
           <div class="card highlight">
-            <div class="stat-number">0-Server</div>
-            <div class="stat-label">100% Client-Side Keys</div>
+            <div class="stat-number">Non-Custodial</div>
+            <div class="stat-label">Client-Side Keys</div>
           </div>
         </div>
       </section>
 
       <!-- SLIDE 2: THE PROBLEM -->
       <section class="slide" data-slide="2">
-        <div class="slide-badge">Market Pain Point · The African Trust Deficit</div>
+        <div class="slide-badge">Problem · Counterparty Risk in Informal Settlements</div>
         <h2 class="slide-title">
-          Stablecoins are Booming, but<br/>
-          <span>Settlement Trust is Broken</span>
+          Stablecoin Adoption is Growing, but<br/>
+          <span>Settlement Counterparty Risk Remains</span>
         </h2>
         <p class="slide-subtitle">
-          Over $30B+ in annual cross-border trade, freelance payments, and informal OTC currency swaps flow across Africa in USDT and USDC. Yet parties face catastrophic operational counterparty risks:
+          Stablecoins (USDT & USDC) are increasingly used for cross-border freelance work, merchant trade, and informal currency swaps in Africa. However, participants face critical settlement risks:
         </p>
 
         <div class="grid-3">
           <div class="card">
             <div class="card-header">
               <div class="card-icon">⚠️</div>
-              <div class="card-title">Centralized P2P Bans & Freezes</div>
+              <div class="card-title">Centralized P2P Friction</div>
             </div>
             <p class="card-desc">
-              Binance P2P and centralized desks freeze user accounts, seize balances, enforce mandatory KYC surveillance, and subject merchants to opaque, slow customer support disputes.
+              Account freezes, arbitrary dispute rulings, and sudden withdrawal restrictions on centralized exchanges leave merchants and users vulnerable to unexpected loss of funds.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">💬</div>
-              <div class="card-title">The WhatsApp OTC Trap</div>
+              <div class="card-title">Informal OTC Default Risk</div>
             </div>
             <p class="card-desc">
-              Cross-border traders and freelancers rely on informal WhatsApp/Telegram groups. Without programmatic escrow, one party must send first—leading to rampant fraud, default, and no recourse.
+              Transactions arranged through WhatsApp or Telegram lack escrow protections. One party must always send fiat or crypto first, leading to recurring scams and non-delivery.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">🏛️</div>
-              <div class="card-title">Zero Frontier Legal Recourse</div>
+              <div class="card-title">Lack of Low-Cost Arbitration</div>
             </div>
             <p class="card-desc">
-              Cross-border commercial disputes across Ethiopia, Kenya, Nigeria, and Dubai cannot afford international litigation. There is no decentralized, economically-incentivized dispute layer.
+              Cross-border commercial dispute amounts ($50–$2,000) are too small for formal legal recourse, leaving merchants and freelancers with no accessible way to resolve disagreements.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 3: MARKET SIZE & GEOGRAPHIES (QUESTION 2) -->
+      <!-- SLIDE 3: TARGET MARKET & GEOGRAPHIES -->
       <section class="slide" data-slide="3">
-        <div class="slide-badge">Market Opportunity · TAM / SAM / SOM & Corridors</div>
+        <div class="slide-badge">Market Focus · Corridors & Target Users</div>
         <h2 class="slide-title">
-          A $50B+ Frontier Opportunity<br/>
-          <span>Anchored in High-Velocity Corridors</span>
+          Focused on High-Friction<br/>
+          <span>Cross-Border Corridors</span>
         </h2>
         <p class="slide-subtitle">
-          Africa is the world leader in grass-roots stablecoin velocity, driven by severe local FX controls, inflation hedging, and youth freelance remote work:
+          Targeting underserved freelance payments and cross-border commercial transactions where counterparty risk is acute:
         </p>
 
         <div class="grid-3">
           <div class="card highlight">
             <div class="card-header">
-              <div class="card-icon">📊</div>
-              <div class="card-title">Market Size (TAM / SAM)</div>
+              <div class="card-icon">🎯</div>
+              <div class="card-title">Target User Segments</div>
             </div>
             <div style="margin-top: 4px;">
               <div class="term-item">
-                <span class="term-label">African Crypto/Stablecoin Volume</span>
-                <span class="term-value">$50B+/yr</span>
+                <span class="term-label">Software Freelancers & Agencies</span>
+                <span class="term-value">Cross-Border Pay</span>
               </div>
               <div class="term-item">
-                <span class="term-label">African Digital Gig & Trade (2030)</span>
-                <span class="term-value">$100B+</span>
+                <span class="term-label">Informal OTC Merchants</span>
+                <span class="term-value">Stablecoin Swaps</span>
               </div>
               <div class="term-item">
-                <span class="term-label">Serviceable Addressable Market (SAM)</span>
-                <span class="term-value">$6.5B</span>
+                <span class="term-label">Import / Export Traders</span>
+                <span class="term-value">Wholesale Goods</span>
               </div>
               <div class="term-item">
-                <span class="term-label">24-Mo Target Escrow GMV (SOM)</span>
-                <span class="term-value">$120M</span>
+                <span class="term-label">Primary Settlement Tokens</span>
+                <span class="term-value">USDC & USDT</span>
               </div>
             </div>
           </div>
@@ -855,35 +830,35 @@
           <div class="card">
             <div class="card-header">
               <div class="card-icon">📍</div>
-              <div class="card-title">Primary Beachhead: East Africa</div>
+              <div class="card-title">Primary Market: East Africa</div>
             </div>
             <p class="card-desc">
-              <strong>Ethiopia (120M+ pop):</strong> Rapidly modernizing economy with historic FX and banking liberalization, booming tech talent, and severe demand for stable USD settlement.<br/><br/>
-              <strong>Kenya (55M+ pop):</strong> East Africa's tech and crypto hub with ubiquitous mobile money infrastructure (M-Pesa) and thriving freelance agencies.
+              <strong>Ethiopia (120M+ pop):</strong> Rapidly growing software freelance and remote work ecosystem facing severe foreign exchange shortages and strict banking restrictions on international payouts.<br/><br/>
+              <strong>Kenya (55M+ pop):</strong> Established digital work and tech export hub with ubiquitous mobile money infrastructure (M-Pesa) and high stablecoin awareness.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">🌐</div>
-              <div class="card-title">Expansion: Pan-Africa & Trade</div>
+              <div class="card-title">Expansion Corridors</div>
             </div>
             <p class="card-desc">
-              <strong>West Africa:</strong> Scaling to Nigeria and Ghana, the continent's largest digital freelance and stablecoin P2P corridors.<br/><br/>
-              <strong>Frontier Wholesale Corridors:</strong> Resolving trust for import-export merchants between East/West Africa and trade hubs in Dubai (UAE) and Guangzhou (China).
+              <strong>West Africa:</strong> High-volume digital freelance and commercial settlement corridors in Nigeria and Ghana.<br/><br/>
+              <strong>Regional Trade Hubs:</strong> Commercial import-export payments connecting East/West African merchants with trading partners in the UAE (Dubai).
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: THE PROTOCOL ENGINE / PRODUCT (QUESTION 1 & 4) -->
+      <!-- SLIDE 4: THE PROTOCOL ENGINE -->
       <section class="slide" data-slide="4">
-        <div class="slide-badge">Protocol Engine · 4-Stage Settlement Lifecycle</div>
+        <div class="slide-badge">Protocol Flow · 4-Stage Settlement Lifecycle</div>
         <h2 class="slide-title">
           <span>CREATE · ESCROW · EVIDENCE · RESOLVE</span>
         </h2>
         <p class="slide-subtitle">
-          DAX replaces human middlemen and centralized custodial risk with an automated EVM state machine running on Arbitrum One:
+          A non-custodial smart contract workflow running on Arbitrum One:
         </p>
 
         <div class="grid-4">
@@ -891,7 +866,7 @@
             <div class="step-num">STAGE 01</div>
             <div class="step-title">CREATE</div>
             <div class="step-desc">
-              Bilateral or open-invitation agreement created. Terms, milestones, and deadlines are cryptographically bound via EIP-712 typed data signatures (`termsHash`).
+              Parties define agreement terms, milestone deliverables, and deadlines, bound cryptographically with EIP-712 typed structured signatures.
             </div>
           </div>
 
@@ -899,7 +874,7 @@
             <div class="step-num">STAGE 02</div>
             <div class="step-title">ESCROW</div>
             <div class="step-desc">
-              Stablecoins (USDT, USDC, ARB, ETH) locked directly in `DAX_AgreementUpgradeable.sol`. Zero admin keys, zero server custody. Funds unlock only on satisfaction.
+              Tokens (USDC, USDT, ARB, ETH) are locked in `DAX_AgreementUpgradeable.sol`. Funds remain on-chain; neither DAX nor a third party holds custody.
             </div>
           </div>
 
@@ -907,7 +882,7 @@
             <div class="step-num">STAGE 03</div>
             <div class="step-title">EVIDENCE</div>
             <div class="step-desc">
-              Work deliverables, bills of lading, or receipts are fingerprinted client-side with SHA-256 and committed as immutable Merkle roots on-chain.
+              Deliverables, source code, or receipts are fingerprinted client-side with SHA-256 and committed as immutable Merkle roots on-chain.
             </div>
           </div>
 
@@ -915,81 +890,81 @@
             <div class="step-num">STAGE 04</div>
             <div class="step-title">RESOLVE</div>
             <div class="step-desc">
-              Disputed escrows automatically escalate to `DAX_Court.sol`. Staked community jurors vote using a commit-reveal Schelling-point game with slashing for corruption.
+              Disputed escrows automatically escalate to `DAX_Court.sol`. Staked community jurors vote using a commit-reveal scheme with economic penalties for dishonesty.
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: SECRET SAUCE & TECHNICAL MOAT (QUESTION 4) -->
+      <!-- SLIDE 5: SECURITY & TECHNICAL DESIGN -->
       <section class="slide" data-slide="5">
-        <div class="slide-badge">Secret Sauce · Zero-Leak Security & Mechanism Design</div>
+        <div class="slide-badge">Security Design · Client Protection & Efficiency</div>
         <h2 class="slide-title">
-          Hardware-Grade Security Meets<br/>
-          <span>Game-Theoretic Community Justice</span>
+          Practical Security &<br/>
+          <span>Mechanism Design</span>
         </h2>
         <p class="slide-subtitle">
-          Four proprietary architectural layers that protect users against surveillance, fund seizure, bribery, and fraud:
+          Core architectural choices focused on user key safety, dispute integrity, and low transaction costs:
         </p>
 
         <div class="grid-4">
           <div class="card">
             <div class="card-header">
               <div class="card-icon">🛡️</div>
-              <div class="card-title">Pure AndroidX Biometrics</div>
+              <div class="card-title">Client-Side Key Vault</div>
             </div>
             <p class="card-desc">
-              Hardware-backed `BIOMETRIC_STRONG` gate with 0 fallback to OS passcodes. Keys derived inside isolated memory using BIP-39/44 and stored in Android Keystore AES-GCM.
+              Keys generated via BIP-39/44 and stored in Android Keystore AES-GCM. Hardware biometric authentication (`BIOMETRIC_STRONG`) with 0 server-side key exposure.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">🔒</div>
-              <div class="card-title">Dynamic Screen Privacy</div>
+              <div class="card-title">Runtime Screen Privacy</div>
             </div>
             <p class="card-desc">
-              Runtime `FLAG_SECURE` integration blinds OS task switcher previews and blocks screenshots whenever private keys, seed phrases, or sensitive agreements are active.
+              Runtime `FLAG_SECURE` prevents OS task-switcher previews and blocks screenshots whenever private keys, seed phrases, or sensitive agreements are visible.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">⚖️</div>
-              <div class="card-title">Anti-Bribery Schelling Court</div>
+              <div class="card-title">Commit-Reveal Court</div>
             </div>
             <p class="card-desc">
-              2-phase commit-reveal voting (`keccak256(vote + salt)`) prevents vote-buying and bandwagoning. Malicious jurors are economically slashed; honest jurors earn dispute fees.
+              Two-phase commit-reveal voting in `DAX_Court.sol` (`keccak256(vote + salt)`) prevents vote-buying and bandwagoning. Malicious jurors forfeit staked tokens.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">⚡</div>
-              <div class="card-title">Sub-Cent L2 Execution</div>
+              <div class="card-title">Arbitrum One Settlement</div>
             </div>
             <p class="card-desc">
-              Natively optimized for Arbitrum One with sub-cent gas fees and instant L2 finality, making micro-agreements and small escrows ($10–$500) frictionless and highly profitable.
+              Optimized for Arbitrum One with sub-cent gas fees and fast L2 finality, making small-ticket escrows ($20–$500) practical and cost-effective.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: LIVE TRACTION & TESTS (QUESTION 3) -->
+      <!-- SLIDE 6: LIVE TRACTION -->
       <section class="slide" data-slide="6">
-        <div class="slide-badge">Execution & Traction · Real Code, Live on Play Store</div>
+        <div class="slide-badge">Execution & Status · Implemented & Verifiable</div>
         <h2 class="slide-title">
-          <span>Fully Tested, Production-Ready</span>
+          <span>Live Android Client & Deployed Contracts</span>
         </h2>
         <p class="slide-subtitle">
-          DAX is engineered, tested, and deployed for our target users: freelance service providers, cross-border traders, and OTC stablecoin merchants across East Africa:
+          Implemented and verifiable on Google Play, Arbitrum One, and GitHub:
         </p>
 
         <div class="grid-3">
           <div class="card highlight">
             <div class="card-title" style="font-size: 1.15rem;">📱 Google Play Store Release</div>
             <p class="card-desc">
-              Android package <strong>`com.dax.app`</strong> (v1.3.5+9). Live mobile app featuring self-custodial multi-token vault, Uniswap V3 swap router, and escrow agreement engine.
+              Android package <strong>`com.dax.app`</strong> (v1.3.5+9) live on Google Play, featuring self-custodial wallet, token swaps, and agreement escrow management.
             </p>
             <div style="margin-top: 10px;">
               <a href="https://play.google.com/store/apps/details?id=com.dax.app" target="_blank" class="cta-btn">
@@ -1013,7 +988,7 @@
           <div class="card highlight">
             <div class="card-title" style="font-size: 1.15rem;">🧪 619 Automated Tests Passing</div>
             <p class="card-desc">
-              <strong>532 Flutter unit/widget tests</strong> verifying zero-leak client invariants + <strong>87 Hardhat adversarial/invariant tests</strong> mathematically proving asset conservation (INV-01 to INV-10).
+              <strong>532 Flutter unit/widget tests</strong> for client logic and <strong>87 Hardhat adversarial/invariant tests</strong> mathematically verifying balance conservation (INV-01 to INV-10).
             </p>
             <div style="margin-top: 10px;">
               <span class="brand-tag">0 Static Analysis Issues</span>
@@ -1022,15 +997,15 @@
         </div>
       </section>
 
-      <!-- SLIDE 7: BUSINESS MODEL & FLYWHEEL (QUESTION 5) -->
+      <!-- SLIDE 7: BUSINESS MODEL -->
       <section class="slide" data-slide="7">
-        <div class="slide-badge">Flywheel & Unit Economics · Sustainable Revenue</div>
+        <div class="slide-badge">Business Model · Sustainable Protocol Revenue</div>
         <h2 class="slide-title">
-          High-Margin Protocol Monetization<br/>
-          <span>With Zero Custodial Liability</span>
+          Volume-Based Protocol Revenue<br/>
+          <span>With Minimal Operational Drag</span>
         </h2>
         <p class="slide-subtitle">
-          DAX captures compounding network fees across escrow volume, dispute settlements, and enterprise integrations:
+          A transparent, low-margin revenue structure designed to incentivize adoption while remaining self-sustaining:
         </p>
 
         <div class="grid-4">
@@ -1040,51 +1015,50 @@
               <div class="card-title">0.10% Fee (0.25% Hard Cap)</div>
             </div>
             <p class="card-desc">
-              Currently set at a lean 0.10% (10 bps) with an immutable on-chain ceiling of 0.25% (25 bps) in smart contracts. Over 15x–30x cheaper than centralized platforms (1.5%–3.5%), driving rapid viral merchant migration while accumulating steady protocol treasury revenue.
+              Deducted automatically from released escrow upon successful completion. Smart contracts enforce an immutable 0.25% maximum ceiling to keep fees predictable.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">⚖️</div>
-              <div class="card-title">Court Fees & Slashing</div>
+              <div class="card-title">Dispute Resolution Fees</div>
             </div>
             <p class="card-desc">
-              Dispute filing fees + protocol cut of slashed outlier juror stakes accrue directly to the decentralized Protocol Treasury.
+              Court filing fees and a portion of slashed stakes from outlier jurors contribute toward sustaining court liquidity and the protocol treasury.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div class="card-icon">🔌</div>
-              <div class="card-title">B2B Escrow-as-a-Service</div>
+              <div class="card-title">Escrow SDK Integration</div>
             </div>
             <p class="card-desc">
-              SDK & API integration enabling gig platforms, e-commerce directories, and OTC desks to embed DAX smart escrow natively for enterprise fee shares.
+              Future B2B integration enabling regional freelance directories, job boards, and OTC desks to embed DAX smart escrow natively.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
-              <div class="card-icon">🚀</div>
-              <div class="card-title">Infinite Leverage</div>
+              <div class="card-icon">🛡️</div>
+              <div class="card-title">Low Overhead</div>
             </div>
             <p class="card-desc">
-              Pure software coordination. Zero balance sheet credit risk, zero regulatory custodial capital requirements, and zero banking overhead.
+              Non-custodial architecture eliminates custodial balance sheet liabilities, third-party custody fees, and costly capital reserve requirements.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: THE TEAM (QUESTION 6) -->
+      <!-- SLIDE 8: THE TEAM -->
       <section class="slide" data-slide="8">
         <div class="slide-badge">Team & Track Record · Frontier Domain Natives</div>
         <h2 class="slide-title">
-          Built by Frontier Engineers<br/>
-          <span>For Frontier Realities</span>
+          <span>Built from Addis Ababa for Frontier Markets</span>
         </h2>
         <p class="slide-subtitle">
-          Elite cryptographic systems engineering combined with firsthand immersion in African merchant corridors:
+          Technical execution combined with direct exposure to African cross-border commerce and payment challenges.
         </p>
 
         <div class="grid-2">
@@ -1097,38 +1071,37 @@
               </div>
             </div>
             <p class="card-desc">
-              • <strong>Proven Execution</strong>: Architected and implemented the entire DAX monorepo single-handedly—authoring 619 passing tests, client-side cryptographic key storage, EVM smart contracts, and shipping to the Google Play Store.<br/>
-              • <strong>Frontier Native</strong>: Based in Addis Ababa, Ethiopia. Lives inside the pain point of FX controls, informal P2P merchant desks, and cross-border payment friction.<br/>
-              • <strong>Technical Depth</strong>: Systems engineer specialized in Flutter Clean Architecture, Solidity smart contract invariants, and hardware-backed mobile security.
+              • <strong>Proven Execution</strong>: Architected and implemented the DAX monorepo, including 619 passing tests, client-side cryptographic key storage, EVM smart contracts, and the production Android application published on Google Play.<br/><br/>
+              • <strong>Market Proximity</strong>: Based in Addis Ababa, Ethiopia, with direct exposure to local FX, P2P commerce, freelance payments, and cross-border payment challenges.<br/><br/>
+              • <strong>Technical Depth</strong>: Backend and systems engineer with experience in Flutter Clean Architecture, Solidity smart contracts and invariants, cryptographic key management, and hardware-backed mobile security.
             </p>
           </div>
 
           <div class="card">
             <div class="card-header">
-              <div class="card-icon">🤝</div>
+              <div class="card-icon">🌐</div>
               <div>
-                <div class="card-title">Advisory & Ecosystem Network</div>
-                <div style="font-family: var(--font-mono); color: #60A5FA; font-size: 0.82rem;">Community & Merchant Partners</div>
+                <div class="card-title">Community & Ecosystem</div>
+                <div style="font-family: var(--font-mono); color: #60A5FA; font-size: 0.82rem;">Testing & Developer Engagement</div>
               </div>
             </div>
             <p class="card-desc">
-              • <strong>Regional Web3 Developer Networks</strong>: Active collaboration with African developer collectives, security researchers, and L2 scaling communities.<br/>
-              • <strong>Local Merchant Pilot Cohort</strong>: Engaged directly with software export agencies, freelance networks, and OTC stablecoin merchants across Addis Ababa and Nairobi for real-world user testing.<br/>
-              • <strong>Open-Source Verification</strong>: 100% public, reproducible repository audited by peer builders.
+              • <strong>Developer & Ecosystem Community</strong>: Engagement with African Web3 developers, security researchers, and blockchain infrastructure communities.<br/><br/>
+              • <strong>Merchant Testing</strong>: Direct testing and feedback from freelance, software-export, and OTC stablecoin users in Addis Ababa and Nairobi.<br/><br/>
+              • <strong>Open Source</strong>: DAX's codebase is publicly available for community review and verification.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: CAPITAL ALLOCATION & TERMS (QUESTION 7) -->
+      <!-- SLIDE 9: CAPITAL ALLOCATION & TERMS -->
       <section class="slide" data-slide="9">
         <div class="slide-badge">Pre-Seed Financing · Deal Terms & Next Milestones</div>
         <h2 class="slide-title">
-          Raising $200k – $300k<br/>
-          <span>To Anchor Frontier On-Chain Commerce</span>
+          <span>Pre-Seed Financing Terms</span>
         </h2>
         <p class="slide-subtitle">
-          Backing DAX accelerates our distribution to freelance hubs, OTC merchant corridors, and local stablecoin on-ramps:
+          Capital to fund third-party security audits, initial dispute staking liquidity, and regional on-ramp integrations:
         </p>
 
         <div class="grid-2">
@@ -1141,11 +1114,11 @@
               </div>
               <div class="term-item">
                 <span class="term-label">Investment Instrument</span>
-                <span class="term-value">YC Post-Money SAFE + Token Warrant</span>
+                <span class="term-value">Post-Money SAFE + Token Warrant</span>
               </div>
               <div class="term-item">
                 <span class="term-label">Valuation Cap</span>
-                <span class="term-value">$3.5M – $5.0M Cap (Open to Align with Lead)</span>
+                <span class="term-value">$3.5M – $5.0M</span>
               </div>
               <div class="term-item">
                 <span class="term-label">Target Runway</span>
@@ -1158,20 +1131,20 @@
             <div class="card-title" style="font-size: 1.1rem;">Use of Funds Allocation</div>
             <div style="margin-top: 6px;">
               <div class="term-item">
-                <span class="term-label">40% · Security & Audits</span>
-                <span class="term-value">Tier-1 smart contract audit & formal proof</span>
+                <span class="term-label">40% · Security Audits</span>
+                <span class="term-value">Third-party audit & formal verification</span>
               </div>
               <div class="term-item">
                 <span class="term-label">30% · Juror Staking</span>
-                <span class="term-value">Bootstrapping decentralized court pools</span>
+                <span class="term-value">Dispute court staking pool liquidity</span>
               </div>
               <div class="term-item">
                 <span class="term-label">20% · Local On-Ramps</span>
-                <span class="term-value">M-Pesa, Telebirr & local stablecoin rails</span>
+                <span class="term-value">M-Pesa, Telebirr & payment rails</span>
               </div>
               <div class="term-item">
-                <span class="term-label">10% · Merchant Growth</span>
-                <span class="term-value">Freelancer & merchant corridor onboarding</span>
+                <span class="term-label">10% · Merchant Onboarding</span>
+                <span class="term-value">Freelancer & merchant corridor pilot</span>
               </div>
             </div>
           </div>
@@ -1179,9 +1152,14 @@
 
         <div class="card" style="margin-top: 14px; padding: 16px 20px;">
           <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
-            <div>
-              <div style="font-weight: 600; font-size: 0.95rem;">Ready to experience DAX?</div>
-              <div style="font-size: 0.82rem; color: var(--text-muted);">Getasew Bekahegn · getasewbekahegn@gmail.com · Addis Ababa, Ethiopia</div>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="logo-glyph" style="padding: 2px;">
+                <img src="dax_logo.png" alt="DAX Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 6px;">
+              </div>
+              <div>
+                <div style="font-weight: 600; font-size: 0.95rem;">Experience DAX</div>
+                <div style="font-size: 0.82rem; color: var(--text-muted);">Getasew Bekahegn · getasewbekahegn@gmail.com · Addis Ababa, Ethiopia</div>
+              </div>
             </div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <a href="https://play.google.com/store/apps/details?id=com.dax.app" target="_blank" class="cta-btn">
@@ -1233,7 +1211,6 @@
 
       totalSlidesCount.textContent = totalSlides;
 
-      // Create dots
       slides.forEach((_, idx) => {
         const dot = document.createElement('div');
         dot.className = 'dot' + (idx === 0 ? ' active' : '');
@@ -1248,7 +1225,7 @@
         slides.forEach((s, i) => {
           s.classList.toggle('active', i === idx);
           if (i === idx) {
-            s.scrollTop = 0; // Always start at top of slide on mobile
+            s.scrollTop = 0;
           }
         });
         dots.forEach((d, i) => {
@@ -1282,7 +1259,6 @@
         else nextSlide();
       });
 
-      // Keyboard Controls
       window.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === ' ') {
           e.preventDefault();
@@ -1294,7 +1270,6 @@
         }
       });
 
-      // Touch / Swipe support with vertical scroll discrimination
       let touchStartX = 0;
       let touchStartY = 0;
       let touchEndX = 0;
@@ -1314,7 +1289,6 @@
       function handleSwipe() {
         const diffX = touchEndX - touchStartX;
         const diffY = touchEndY - touchStartY;
-        // Only trigger slide navigation if swipe is predominantly horizontal and exceeds threshold
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
           if (diffX < 0) nextSlide();
           else prevSlide();
