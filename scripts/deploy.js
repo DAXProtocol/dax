@@ -34,22 +34,36 @@ async function main() {
   await amm.waitForDeployment();
   console.log("DAX AMM deployed to:", await amm.getAddress());
 
-  // Deploy P2P Escrow contract
-  const P2PFactory = await ethers.getContractFactory("DAX_P2P");
-  const p2p = await P2PFactory.deploy(deployer.address, daxTokenAddr);
-  await p2p.waitForDeployment();
-  console.log("DAX P2P Escrow deployed to:", await p2p.getAddress());
+  // Deploy DAX Court Arbitration contract
+  const CourtFactory = await ethers.getContractFactory("DAX_Court");
+  const court = await CourtFactory.deploy(
+    daxTokenAddr,     // Staking token
+    deployer.address  // Treasury
+  );
+  await court.waitForDeployment();
+  const courtAddr = await court.getAddress();
+  console.log("DAX Court deployed to:", courtAddr);
 
-  // Deploy DAX_Agreement Protocol contract
+  // Deploy DAX_Agreement Protocol contract (Universal Trusted Layer for Agreements)
   const AgreementFactory = await ethers.getContractFactory("DAX_Agreement");
   const agreement = await AgreementFactory.deploy(
     deployer.address, // Treasury
     25,               // 0.25% protocol fee
-    deployer.address, // Initial Dispute Court (Deployer/Safety Council)
+    courtAddr,        // Dispute Court
     deployer.address  // Initial Trusted Forwarder
   );
   await agreement.waitForDeployment();
-  console.log("DAX_Agreement Protocol deployed to:", await agreement.getAddress());
+  const agreementAddr = await agreement.getAddress();
+  console.log("DAX_Agreement Protocol deployed to:", agreementAddr);
+
+  // Deploy DAX_OfferPool contract
+  const OfferPoolFactory = await ethers.getContractFactory("DAX_OfferPool");
+  const offerPool = await OfferPoolFactory.deploy(
+    agreementAddr,
+    deployer.address // Treasury
+  );
+  await offerPool.waitForDeployment();
+  console.log("DAX OfferPool deployed to:", await offerPool.getAddress());
 
   console.log("Deployment finished successfully!");
 }

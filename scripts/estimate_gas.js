@@ -2,7 +2,7 @@ import pkg from "hardhat";
 const { ethers } = pkg;
 
 async function main() {
-  const [owner, buyer, seller] = await ethers.getSigners();
+  const [owner, partyA, partyB] = await ethers.getSigners();
 
   // Deploy Mock Token
   const MockTokenFactory = await ethers.getContractFactory("MockToken");
@@ -10,101 +10,66 @@ async function main() {
   await token.waitForDeployment();
   const tokenAddr = await token.getAddress();
 
-  // Mint to buyer/seller
-  await token.transfer(seller.address, ethers.parseEther("10000"));
-  await token.transfer(buyer.address, ethers.parseEther("10000"));
+  // Mint to partyA
+  await token.transfer(partyA.address, ethers.parseEther("10000"));
 
-  // Deploy P2P
-  const P2PFactory = await ethers.getContractFactory("DAX_P2P");
-  const p2p = await P2PFactory.deploy(owner.address, tokenAddr);
-  await p2p.waitForDeployment();
-  const p2pAddr = await p2p.getAddress();
+  // Deploy DAX Court & Agreement
+  const CourtFactory = await ethers.getContractFactory("DAX_Court");
+  const court = await CourtFactory.deploy(tokenAddr, owner.address);
+  await court.waitForDeployment();
+  const courtAddr = await court.getAddress();
+
+  const AgreementFactory = await ethers.getContractFactory("DAX_Agreement");
+  const agreement = await AgreementFactory.deploy(owner.address, 25, courtAddr, owner.address);
+  await agreement.waitForDeployment();
+  const agreementAddr = await agreement.getAddress();
 
   console.log("\n====================================================");
-  console.log("DAX P2P Gas Estimation Report (in Gas Units)");
+  console.log("DAX Universal Agreement Protocol Gas Estimation Report");
   console.log("====================================================\n");
 
-  // 1. Approve P2P contract
-  let tx = await token.connect(seller).approve(p2pAddr, ethers.parseEther("100"));
+  // 1. Approve token
+  const escrowAmt = ethers.parseEther("100");
+  let tx = await token.connect(partyA).approve(agreementAddr, escrowAmt);
   let receipt = await tx.wait();
   console.log(`1. Token Approval (approve): ${receipt.gasUsed.toString()} gas`);
 
-  // 2. Create Ad (isSellAd = true)
-  tx = await p2p.connect(seller).createAd(
+  // 2. Create & Fund Agreement
+  const termsHash = ethers.id("Agreement Terms: Full Stack Web Development");
+  const salt = ethers.hexlify(ethers.randomBytes(32));
+  const deadline = Math.floor(Date.now() / 1000) + 86400 * 7;
+
+  tx = await agreement.connect(partyA).createAndFundAgreement(
+    partyB.address,
     tokenAddr,
-    ethers.parseEther("100"),
-    ethers.parseEther("10"),
-    ethers.parseEther("100"),
-    60000000n, // $60 rate
-    "USD",
-    "Revolut",
-    true // isSellAd
+    escrowAmt,
+    termsHash,
+    deadline,
+    salt
   );
   receipt = await tx.wait();
-  console.log(`2. Create Sell Ad (createAd): ${receipt.gasUsed.toString()} gas`);
+  console.log(`2. Create & Fund Agreement (createAndFundAgreement): ${receipt.gasUsed.toString()} gas`);
 
-  // 3. Initiate Trade
-  tx = await p2p.connect(buyer).initiateTrade(1, ethers.parseEther("20"));
-  receipt = await tx.wait();
-  console.log(`3. Initiate Trade (initiateTrade): ${receipt.gasUsed.toString()} gas`);
-
-  // 4. Mark Paid
-  tx = await p2p.connect(buyer).markPaid(1);
-  receipt = await tx.wait();
-  console.log(`4. Mark Paid (markPaid): ${receipt.gasUsed.toString()} gas`);
-
-  // 5. Release Trade
-  tx = await p2p.connect(seller).releaseTrade(1);
-  receipt = await tx.wait();
-  console.log(`5. Release Escrow (releaseTrade): ${receipt.gasUsed.toString()} gas`);
-
-  // 6. Create another Ad to test Cancel Ad
-  await token.connect(seller).approve(p2pAddr, ethers.parseEther("50"));
-  tx = await p2p.connect(seller).createAd(
-    tokenAddr,
-    ethers.parseEther("50"),
-    ethers.parseEther("5"),
-    ethers.parseEther("50"),
-    60000000n,
-    "USD",
-    "Revolut",
-    true
+  // Compute agreementId
+  const agreementId = ethers.keccak256(
+    ethers.AbiCoder.defaultAbiCoder().encode(
+      ["address", "address", "address", "uint256", "bytes32", "uint64", "bytes32"],
+      [partyA.address, partyB.address, tokenAddr, escrowAmt, termsHash, deadline, salt]
+    )
   );
-  await tx.wait();
 
-  // Cancel Ad
-  tx = await p2p.connect(seller).cancelAd(2);
+  // 3. Attach Evidence
+  const evidenceRoot = ethers.id("Commitment Evidence SHA-256");
+  tx = await agreement.connect(partyB).attachEvidence(agreementId, evidenceRoot);
   receipt = await tx.wait();
-  console.log(`6. Cancel Ad (cancelAd): ${receipt.gasUsed.toString()} gas`);
+  console.log(`3. Attach Evidence (attachEvidence): ${receipt.gasUsed.toString()} gas`);
 
-  // 7. Create another Ad and Trade to test Cancel Trade (expiration)
-  await token.connect(seller).approve(p2pAddr, ethers.parseEther("50"));
-  await p2p.connect(seller).createAd(
-    tokenAddr,
-    ethers.parseEther("50"),
-    ethers.parseEther("5"),
-    ethers.parseEther("50"),
-    60000000n,
-    "USD",
-    "Revolut",
-    true
-  );
-  await p2p.connect(buyer).initiateTrade(3, ethers.parseEther("10"));
-
-  // Fast forward time
-  await ethers.provider.send("evm_increaseTime", [31 * 60]);
-  await ethers.provider.send("evm_mine");
-
-  tx = await p2p.connect(seller).cancelTrade(2);
+  // 4. Release Escrow
+  tx = await agreement.connect(partyA).releaseEscrow(agreementId);
   receipt = await tx.wait();
-  console.log(`7. Cancel Trade & Restore (cancelTrade): ${receipt.gasUsed.toString()} gas`);
+  console.log(`4. Settle & Release Escrow (releaseEscrow): ${receipt.gasUsed.toString()} gas`);
 
-  console.log("\n====================================================");
-  console.log("Arbitrum Mainnet Gas Cost Calculation (USD equivalent):");
-  console.log("Typically, Arbitrum gas price is around 0.1 Gwei.");
-  console.log("L1 fee is around 0.00001 - 0.00003 ETH per tx.");
-  console.log("Total typical cost on Arbitrum is less than $0.05 per action.");
-  console.log("====================================================\n");
+  console.log("\nGas estimation complete.\n");
 }
 
 main()
