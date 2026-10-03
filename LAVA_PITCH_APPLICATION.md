@@ -29,10 +29,11 @@
   - **Ethiopia — Product & Technology Beachhead**:
     - **Product & Engineering Base**: Built from Addis Ababa, with local developers and freelancers as an early user and testing base for permitted software milestone escrow, deliverable proofs, and commercial agreements.
     - **Regulatory Monitoring**: Monitoring NBE's evolving digital-asset and payment frameworks while avoiding premature claims about fiat on-ramp availability or licensing.
-  - **Kenya & Priority Corridors**:
-    - **Regulated Payment-Rail Expansion**: Kenya and other priority African markets are potential early expansion corridors for integrations with licensed payment providers and payment instrument issuers.
-    - **Trust Layer Model**: DAX provides the non-custodial smart escrow and dispute-arbitration layer, while regulated payment providers handle applicable fiat payment and on/off-ramp functions.
-- **Strategic Core**: *"Ethiopia is our technical and product base; regulated African payment corridors are our expansion path."*
+  - **Priority African Corridors**:
+    - **Regulated Payment-Rail Expansion**: Priority African markets are evaluated for expansion by exploring partnerships with licensed payment providers and emerging virtual-asset infrastructure.
+    - **Trust Layer Model**: DAX provides the non-custodial smart-agreement and dispute-arbitration layer, while appropriately licensed partners handle applicable payment and on/off-ramp services.
+- **Strategic Core**: *"Ethiopia is our technical and product base; priority African corridors are our expansion path."*
+- **Market Flexibility**: We start from Ethiopia as our product & engineering base, evaluating priority African corridors based on stablecoin activity, cross-border commercial friction, and regulatory readiness rather than locking into a single jurisdiction prematurely.
 - **Architecture Distinction**: DAX's core product is the non-custodial **trust, agreement, and dispute resolution layer**, not necessarily the payment gateway itself. We eliminate counterparty risk and escrow funds trustlessly on Arbitrum One without needing to own every local fiat rail.
 
 ---
